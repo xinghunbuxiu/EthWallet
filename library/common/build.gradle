@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        //添加如下配置就OK了
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+        }
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            zipAlignEnabled true
+        }
+    }
+}
+
+dependencies {
+    //显示图片框架
+    //RxJava and RxAndroid
+    //retrofit和rxjava
+    //json解析封装框架
+    //注解绑定
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':library:bottom-navigation-bar')
+    //基本东西
+    compile rootProject.ext.dependencies.butterknife
+    compile rootProject.ext.dependencies.appcompatV7
+    compile rootProject.ext.dependencies.design
+    compile rootProject.ext.dependencies.spinkit
+    compile rootProject.ext.dependencies.recycle
+    compile rootProject.ext.dependencies.fastJson
+    compile rootProject.ext.dependencies.rxpermissions
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'com.squareup.retrofit2:retrofit:latest.integration'
+    compile 'com.squareup.okhttp3:logging-interceptor:latest.integration'
+    compile 'io.reactivex:rxjava:1.0.1'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'com.squareup.retrofit2:converter-gson:latest.integration'
+    compile 'com.squareup.retrofit2:adapter-rxjava:latest.integration'
+    //dialog
+    compile 'com.flyco.dialog:FlycoDialog_Lib:1.3.2@aar'
+    compile ('com.afollestad.material-dialogs:core:0.9.4.5'){
+        exclude group: 'com.android.support'
+    }
+
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.youth.banner:banner:1.4.9'  //最新版本
+
+    compile 'com.google.zxing:core:3.2.1'      //zxing核心依赖
+    compile 'com.journeyapps:zxing-android-embedded:3.3.0'
+}
