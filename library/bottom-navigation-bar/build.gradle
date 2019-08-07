@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
-    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
@@ -18,8 +18,7 @@ android {
     }
 }
 dependencies {
-    testCompile 'junit:junit:4.12'
-    compile rootProject.ext.dependencies.appcompatV7
-    compile rootProject.ext.dependencies.design
+    api rootProject.ext.dependencies.appcompatV7
+    api rootProject.ext.dependencies.design
 }
 

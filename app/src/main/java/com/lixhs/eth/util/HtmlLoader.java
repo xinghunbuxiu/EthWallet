@@ -65,9 +65,8 @@ public class HtmlLoader {
     // 网络图片先下载到本地cache目录保存，以imagUrl的图片文件名保存。如果有同名文件在cache目录就从本地加载
     public static Elements loadHtmlFromUrl(String url) {
         try {
-            Document document = Jsoup.connect(url).get();
-            Elements element = document.getElementById("ContentPlaceHolder1_divSummary").select("table").select("tbody").select("tr");
-            ;
+            Document document = Jsoup.connect(url).ignoreContentType(true).userAgent("Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.2.15)").timeout(5000).get();
+            Elements element = document.select("body");
             return element;
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,7 +80,7 @@ public class HtmlLoader {
 
     public static HtmlLoader get(Context context) {
         if (htmlLoader == null) {
-            synchronized (Glide.class) {
+            synchronized (HtmlLoader.class) {
                 if (htmlLoader == null) {
                     htmlLoader = new HtmlLoader();
                 }
